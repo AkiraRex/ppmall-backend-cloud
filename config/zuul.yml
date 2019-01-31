@@ -1,0 +1,57 @@
+﻿server:
+  port: 3345
+
+spring:
+  application:
+    name: ppmall-zuul
+  
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+  client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka/
+zuul: 
+  sensitive-headers: #zuul转发会丢失header加上这个属性不用
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+#  routes:
+#    uaa:
+#      path: /uaa/**
+#      strip-prefix: true
+#      sensitiveHeaders:
+#      serviceId: authcenter
+  routes:
+    ppmall-service-user:
+      path: /user-api/**
+      serviceId: ppmall-service-user
+      
+security: 
+  oauth2: 
+    resource: 
+      user-info-uri:  http://ppmall-oauth2server/user
+      prefer-token-info: false
+      loadBalanced: true
+##############end#####################
+####超时配置####
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  eureka:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+###超时配置###

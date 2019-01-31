@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: ppmall-zuul
+  cloud:
+    config:
+      name: eureka,zuul,common,druid #需要从配置中心读取的资源名称
+      profile: dev   #访问的配置项
+      label: master
+      uri: http://localhost:8888 #配置中心服务
+      

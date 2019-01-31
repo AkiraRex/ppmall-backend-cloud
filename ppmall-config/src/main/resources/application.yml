@@ -1,0 +1,34 @@
+server: 
+  port: 8888
+
+spring:
+  application:
+    name: ppmall-config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      label: master
+      server:
+        native:
+          search-locations: D:/git/config/  #从路径中读取配置文件
+#  cloud: 
+#    config: 
+#      server: 
+#        git: 
+#          uri: https://github.com/forezp/SpringcloudConfig/
+#          searchPaths: respo
+#          username: 
+#          password: 
+#      label: master
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    
+management:
+  endpoints:
+    web:
+       exposure:
+         include: bus-refresh  #spring boot 2.0版本服务监控要加这个配置，开启和暴露端点

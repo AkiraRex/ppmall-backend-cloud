@@ -1,0 +1,25 @@
+﻿spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    publisher-confirms: true    #消息发送到交换机确认机制,是否确认回调
+  redis:
+    host: 47.93.184.228
+    port: 6379
+    password: zxcvbnm
+    database: 1
+    pool:
+      max-active: 8
+      min-idle: 1
+      max-idle: 1
+      max-wait: -1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #配置启用所有的监控端点
+    health:
+      show-details: always  #展示详细的应用健康信息
