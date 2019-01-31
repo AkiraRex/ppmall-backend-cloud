@@ -1,9 +1,9 @@
 ﻿spring:
   rabbitmq:
-    host: localhost
+    host: 47.93.184.228
     port: 5672
-    username: guest
-    password: guest
+    username: admin
+    password: zxcvbnm
     publisher-confirms: true    #消息发送到交换机确认机制,是否确认回调
   redis:
     host: 47.93.184.228
@@ -23,3 +23,5 @@ management:
         include: "*"  #配置启用所有的监控端点
     health:
       show-details: always  #展示详细的应用健康信息
+      
+      
