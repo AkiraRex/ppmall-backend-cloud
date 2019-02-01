@@ -8,7 +8,7 @@ import com.yc.pojo.User;
 import com.yc.response.ServerResponse;
 import com.yc.service.impl.IUserServiceImpl;
 
-@FeignClient(name = "ppmall-service-user", fallback = IUserServiceImpl.class)
+@FeignClient(name = "ppmall-service-user", fallbackFactory = IUserServiceImpl.class)
 public interface IUserService {
 	@GetMapping("/rpc/user/findByUsername/{username}")
 	ServerResponse<User> findByUsername(@PathVariable("username") String username);

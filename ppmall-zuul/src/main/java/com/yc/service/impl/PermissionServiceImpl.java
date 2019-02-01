@@ -11,10 +11,7 @@ import com.yc.service.PermissionService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA. Description: User: Mr.Yangxiufeng Date:
- * 2018-05-14 Time: 16:01
- */
+
 @Service("permissionService")
 public class PermissionServiceImpl implements PermissionService {
 
@@ -36,19 +33,19 @@ public class PermissionServiceImpl implements PermissionService {
 		@SuppressWarnings("unchecked")
 		List<SimpleGrantedAuthority> grantedAuthorityList = (List<SimpleGrantedAuthority>) authentication
 				.getAuthorities();
-//		boolean hasPermission = false;
-		boolean hasPermission = true;
-//		if (principal != null) {
-//			if (CollectionUtils.isEmpty(grantedAuthorityList)) {
-//				return true;
-//			}
-//			for (SimpleGrantedAuthority authority : grantedAuthorityList) {
-//				if (antPathMatcher.match(authority.getAuthority(), requestUrl)) {
-//					hasPermission = true;
-//					break;
-//				}
-//			}
-//		}
+		boolean hasPermission = false;
+//		boolean hasPermission = true;
+		if (principal != null) {
+			if (CollectionUtils.isEmpty(grantedAuthorityList)) {
+				return false;
+			}
+			for (SimpleGrantedAuthority authority : grantedAuthorityList) {
+				if (antPathMatcher.match(authority.getAuthority(), requestUrl)) {
+					hasPermission = true;
+					break;
+				}
+			}
+		}
 
 		return hasPermission;
 	}

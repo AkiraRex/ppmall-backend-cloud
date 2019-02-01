@@ -22,27 +22,27 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from mmall_user
+        from ppmall_user
         where id = #{id,jdbcType=INTEGER}
     </select>
     <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
-        from mmall_user
+        from ppmall_user
         where username = #{username,jdbcType=INTEGER}
     </select>
     <select id="selectByWechatOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
-        from mmall_user
+        from ppmall_user
         where wechat_openid = #{wechatOpenid,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from mmall_user
+    delete from ppmall_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.yc.pojo.User">
-    insert into mmall_user (id, username, password, 
+    insert into ppmall_user (id, username, password, 
       email, phone, question, 
       answer, role, wechat_openid, 
       create_time, update_time)
@@ -52,7 +52,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="com.yc.pojo.User">
-        insert into mmall_user
+        insert into ppmall_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -122,7 +122,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.yc.pojo.User">
-        update mmall_user
+        update ppmall_user
         <set>
             <if test="username != null">
                 username = #{username,jdbcType=VARCHAR},
@@ -155,7 +155,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.yc.pojo.User">
-    update mmall_user
+    update ppmall_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
@@ -171,33 +171,33 @@
       select 
       <include refid="Base_Column_List"/>
        from
-        mmall_user
+        ppmall_user
       WHERE username = #{username} AND password = #{password};
     </select>
     <select id="selectPasswordByUsername" resultType="string" parameterType="string">
-        SELECT password FROM mmall_user WHERE username = #{username}
+        SELECT password FROM ppmall_user WHERE username = #{username}
     </select>
     <select id="selectCountByUsername" resultType="int" parameterType="string">
-      SELECT count(1) FROM mmall_user WHERE username = #{username}
+      SELECT count(1) FROM ppmall_user WHERE username = #{username}
     </select>
     <select id="selectCountByPhone" resultType="int" parameterType="string">
-      SELECT count(1) FROM mmall_user WHERE phone = #{phone}
+      SELECT count(1) FROM ppmall_user WHERE phone = #{phone}
     </select>
     <select id="selectCountByEmail" resultType="int" parameterType="string">
-      SELECT count(1) FROM mmall_user WHERE email = #{email}
+      SELECT count(1) FROM ppmall_user WHERE email = #{email}
     </select>
     <select id="selectPassQuestionByUsername" resultType="string" parameterType="string">
-      SELECT question FROM mmall_user WHERE username = #{username}
+      SELECT question FROM ppmall_user WHERE username = #{username}
     </select>
     <update id="updatePasswordByUsername" parameterType="map">
-      update mmall_user set password = #{password},update_time = NOW()
+      update ppmall_user set password = #{password},update_time = NOW()
       where username = #{username}
     </update>
     <select id="selectAnswerByUsername" resultType="string" parameterType="string">
-        SELECT answer FROM mmall_user WHERE username = #{username}
+        SELECT answer FROM ppmall_user WHERE username = #{username}
     </select>
     <update id="updateUserByUsername" parameterType="com.yc.pojo.User">
-        update mmall_user
+        update ppmall_user
         <set>
             <if test="username != null">
                 username = #{username,jdbcType=VARCHAR},

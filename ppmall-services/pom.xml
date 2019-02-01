@@ -54,6 +54,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- feignclient -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>yc</groupId>
 			<artifactId>ppmall-common-base</artifactId>
@@ -68,6 +73,12 @@
 			<groupId>yc</groupId>
 			<artifactId>ppmall-common-domain</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!--mybatis 自动生成插件-->
+		<dependency>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+			<version>1.3.5</version>
 		</dependency>
 	</dependencies>
 

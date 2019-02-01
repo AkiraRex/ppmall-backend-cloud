@@ -22,10 +22,10 @@ spring:
 #          password: 
 #      label: master
   rabbitmq:
-    host: localhost
+    host: 47.93.184.228
     port: 5672
-    username: guest
-    password: guest
+    username: admin
+    password: zxcvbnm
     
 management:
   endpoints:
