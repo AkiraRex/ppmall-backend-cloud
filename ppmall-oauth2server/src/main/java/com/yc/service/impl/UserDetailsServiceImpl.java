@@ -14,10 +14,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.yc.common.response.ResponseCode;
+import com.yc.common.response.ServerResponse;
 import com.yc.pojo.Role;
 import com.yc.pojo.RoleUrl;
-import com.yc.response.ResponseCode;
-import com.yc.response.ServerResponse;
 import com.yc.service.IRoleService;
 import com.yc.service.IUserService;
 
@@ -29,6 +29,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private IRoleService iRoleService;
+	
+
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

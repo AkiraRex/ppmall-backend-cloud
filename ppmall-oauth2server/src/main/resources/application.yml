@@ -3,10 +3,12 @@ server:
   
 eureka:
   instance:
-    prefer-ip-address: true
+    prefer-ip-address: true #使用IP注册
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     ##续约更新时间间隔设置5秒，m默认30s
     lease-renewal-interval-in-seconds: 5
+    ##续约到期时间10秒，默认是90秒
+    lease-expiration-duration-in-seconds: 10
     
 ###feign 默认关闭熔断，请看HystrixFeignConfiguration
 feign:

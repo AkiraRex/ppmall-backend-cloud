@@ -1,8 +1,8 @@
 package com.yc.service.impl;
 import org.springframework.stereotype.Service;
 
+import com.yc.common.response.ServerResponse;
 import com.yc.pojo.User;
-import com.yc.response.ServerResponse;
 import com.yc.service.IUserService;
 import feign.hystrix.FallbackFactory;
 

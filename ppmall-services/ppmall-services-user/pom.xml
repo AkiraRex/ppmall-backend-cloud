@@ -7,7 +7,15 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>ppmall-services-user</artifactId>
-	
+
+	<dependencies>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>transmittable-thread-local</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>

@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 
-import com.yc.response.ServerResponse;
+import com.yc.common.response.ServerResponse;
 
 @Component
 public class ServiceFallbackProvider implements FallbackProvider {
