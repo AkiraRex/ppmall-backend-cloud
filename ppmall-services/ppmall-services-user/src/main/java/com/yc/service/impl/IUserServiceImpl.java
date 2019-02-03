@@ -3,10 +3,13 @@ package com.yc.service.impl;
 import org.apache.commons.lang.ObjectUtils.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yc.common.constant.Const;
 import com.yc.common.response.ServerResponse;
+import com.yc.dao.RoleUserMapper;
 import com.yc.dao.UserMapper;
+import com.yc.pojo.RoleUser;
 import com.yc.pojo.User;
 import com.yc.service.IUserService;
 import com.yc.service.rpc.IUserRpcService;
@@ -20,6 +23,9 @@ public class IUserServiceImpl implements IUserService {
 
 	@Autowired
 	private IUserRpcService iUserRpcService;
+	
+	@Autowired
+	private RoleUserMapper roleUserMapper;
 
 	@Override
 	public ServerResponse<User> findByUsername(String username) {
@@ -36,6 +42,7 @@ public class IUserServiceImpl implements IUserService {
 		return ServerResponse.createSuccess(user);
 	}
 
+	@Transactional
 	@Override
 	public ServerResponse<Null> register(User user) {
 		// TODO Auto-generated method stub
@@ -51,10 +58,18 @@ public class IUserServiceImpl implements IUserService {
 		if (emailCount > 0)
 			return ServerResponse.createErrorMessage("该邮箱已注册");
 		
-
+		int insertCount = userMapper.insert(user);
+		
 		user.setRole(Const.Role.ROLE_CUSTOMER);
 		user.setPassword(BCryptUtils.encode(user.getPassword()));
-		int insertCount = userMapper.insert(user);
+		
+		RoleUser roleUser = new RoleUser();
+		roleUser.setRoleId(Const.Role.ROLE_CUSTOMER);
+		roleUser.setUserId(user.getId());
+
+		roleUserMapper.insert(roleUser);
+		
+		
 
 		if (insertCount > 0) {
 			return ServerResponse.createSuccessMessage("注册成功");
