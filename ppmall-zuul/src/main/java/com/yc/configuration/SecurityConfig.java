@@ -26,7 +26,9 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
 			"/configuration/security",
 			"/swagger-ui.html",
 			"swagger-resources/configuration/ui",
-			"/doc.html", "/webjars/**"
+			"/doc.html", 
+			"/webjars/**",
+			"/user-api/portal/user/register"
 			};
 
 	@Override

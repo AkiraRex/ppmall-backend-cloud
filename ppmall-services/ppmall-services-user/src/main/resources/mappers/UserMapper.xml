@@ -41,7 +41,7 @@
     delete from ppmall_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.yc.pojo.User">
+    <insert id="insert" useGeneratedKeys="true" parameterType="com.yc.pojo.User">
     insert into ppmall_user (id, username, password, 
       email, phone, question, 
       answer, role, wechat_openid, 
@@ -49,7 +49,7 @@
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
       #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{wechatOpenid,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      sysdate(), sysdate())
   </insert>
     <insert id="insertSelective" parameterType="com.yc.pojo.User">
         insert into ppmall_user
