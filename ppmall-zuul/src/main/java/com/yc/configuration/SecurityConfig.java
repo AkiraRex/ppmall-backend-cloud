@@ -28,8 +28,9 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
 			"swagger-resources/configuration/ui",
 			"/doc.html", 
 			"/webjars/**",
-			"/user-api/portal/user/register"
-			};
+			"/user-api/portal/user/register",
+			"/user-api/portal/user/checkValid"
+		};
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {

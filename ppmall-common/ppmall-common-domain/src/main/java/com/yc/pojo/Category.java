@@ -7,97 +7,101 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+public class Category implements Comparable<Category>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2823885021953201001L;
 
-public class Category implements Comparable,Serializable {
-    private Integer id;
+	private Integer id;
 
-    private Integer parentId;
+	private Integer parentId;
 
-    private String name;
+	private String name;
 
-    private Boolean status;
+	private Boolean status;
 
-    private Integer sortOrder;
+	private Integer sortOrder;
 
-    private Date createTime;
+	private Date createTime;
 
-    private Date updateTime;
-    
-    private String mainImage;
+	private Date updateTime;
 
+	private String mainImage;
 
-    public Category(Integer id, Integer parentId, String name, Boolean status, Integer sortOrder, Date createTime, Date updateTime, String mainImage) {
-        this.id = id;
-        this.parentId = parentId;
-        this.name = name;
-        this.status = status;
-        this.sortOrder = sortOrder;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-        this.mainImage = mainImage;
-    }
+	public Category(Integer id, Integer parentId, String name, Boolean status, Integer sortOrder, Date createTime,
+			Date updateTime, String mainImage) {
+		this.id = id;
+		this.parentId = parentId;
+		this.name = name;
+		this.status = status;
+		this.sortOrder = sortOrder;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.mainImage = mainImage;
+	}
 
-    public Category() {
-        super();
-    }
+	public Category() {
+		super();
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getParentId() {
-        return parentId;
-    }
+	public Integer getParentId() {
+		return parentId;
+	}
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
 
-    public Boolean getStatus() {
-        return status;
-    }
+	public Boolean getStatus() {
+		return status;
+	}
 
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 
-    public Integer getSortOrder() {
-        return sortOrder;
-    }
+	public Integer getSortOrder() {
+		return sortOrder;
+	}
 
-    public void setSortOrder(Integer sortOrder) {
-        this.sortOrder = sortOrder;
-    }
+	public void setSortOrder(Integer sortOrder) {
+		this.sortOrder = sortOrder;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
-    public String getMainImage() {
+	public String getMainImage() {
 		return mainImage;
 	}
 
@@ -106,35 +110,37 @@ public class Category implements Comparable,Serializable {
 	}
 
 	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(id, category.id);
-    }
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Category category = (Category) o;
+		return Objects.equals(id, category.id);
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
-    @Override
-    public int compareTo(Object o) {
-        if (this.getId() > ((Category) o).getId())
-            return 1;
-        return -1;
-    }
-    
-    @Override
-    public String toString() {
-    	// TODO Auto-generated method stub
-    	 ObjectMapper mapper = new ObjectMapper();
-         try {
-             String returnString =  mapper.writeValueAsString(this);
-             return returnString;
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-         return super.toString();
-    }
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String returnString = mapper.writeValueAsString(this);
+			return returnString;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return super.toString();
+	}
+
+	@Override
+	public int compareTo(Category o) {
+		if (this.getId() > ((Category) o).getId())
+			return 1;
+		return -1;
+	}
 }
