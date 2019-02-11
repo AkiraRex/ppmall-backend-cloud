@@ -6,4 +6,11 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>ppmall-common-base</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>yc</groupId>
+  		<artifactId>ppmall-common-config</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

@@ -10,6 +10,8 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>ppmall-services-user</module>
+		<module>ppmall-services-product</module>
+		<module>ppmall-services-cart</module>
 	</modules>
 
 	<dependencies>
