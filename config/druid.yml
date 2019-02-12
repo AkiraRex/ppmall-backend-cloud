@@ -1,9 +1,9 @@
 ﻿spring:
   #数据库连接信息
   datasource:
-    url: jdbc:mysql://192.168.2.13:3306/zhxck?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://47.93.184.228:3306/ppmall-cloud?characterEncoding=utf8&useSSL=false
     username: root
-    password: root
+    password: zxcvbnm
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     # 下面为连接池的补充设置，应用到上面所有数据源中
@@ -30,3 +30,9 @@
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
+    
+    
+# mybatis配置
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+

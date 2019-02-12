@@ -11,7 +11,8 @@ spring:
       label: master
       server:
         native:
-          search-locations: D:/git/config/  #从路径中读取配置文件
+#          search-locations: D:/git/config/  #从路径中读取配置文件
+          search-locations: /usr/local/ppmallcloud/config/  #从路径中读取配置文件Linux
 #  cloud: 
 #    config: 
 #      server: 

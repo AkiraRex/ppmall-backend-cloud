@@ -13,7 +13,7 @@ eureka:
     lease-expiration-duration-in-seconds: 10
   client:
       service-url:
-        defaultZone: http://localhost:8761/eureka/
+        defaultZone: http://47.93.184.228:8761/eureka/
 zuul: 
   sensitive-headers: #zuul转发会丢失header加上这个属性不用
   host:
