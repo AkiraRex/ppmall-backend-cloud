@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.kafka.support.Acknowledgment;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.alibaba.otter.canal.protocol.Message;
@@ -23,6 +24,9 @@ public abstract class MessageHandler {
 	protected int exceptionStrategy = 1;
 	protected int retryTimes = 3;
 	protected int waitingTime = 100;// 当binlog没有数据时，主线程等待的时间，单位ms,大于0
+	
+	protected static String TABLE_NAME = "ppmall_product";
+	protected static String SCHEMA_NAME = "ppmall-cloud";
 
 	static {
 		StringBuilder sb = new StringBuilder();
@@ -54,23 +58,23 @@ public abstract class MessageHandler {
 		transactionFormat = sb.toString();
 	}
 
-	public abstract void insert(CanalEntry.Header header, List<CanalEntry.Column> afterColumns);
+	public abstract void insert(CanalEntry.Header header, List<CanalEntry.Column> afterColumns, Acknowledgment acknowledgment);
 
-	public abstract void update(CanalEntry.Header header, List<CanalEntry.Column> afterColumns);
+	public abstract void update(CanalEntry.Header header, List<CanalEntry.Column> afterColumns, Acknowledgment acknowledgment);
 
-	public abstract void delete(CanalEntry.Header header, List<CanalEntry.Column> beforeColumns);
+	public abstract void delete(CanalEntry.Header header, List<CanalEntry.Column> beforeColumns, Acknowledgment acknowledgment);
 
-	protected void processMessage(Message message) {
+	protected void processMessage(Message message, Acknowledgment acknowledgment) {
 		//long batchId = message.getId();
 		// 遍历每条消息
 		for (CanalEntry.Entry entry : message.getEntries()) {
-			session(entry);// no exception
+			session(entry, acknowledgment);// no exception
 		}
 		// ack all the time。
 		// connector.ack(batchId);
 	}
 
-	private void session(CanalEntry.Entry entry) {
+	private void session(CanalEntry.Entry entry, Acknowledgment acknowledgment) {
 		CanalEntry.EntryType entryType = entry.getEntryType();
 		int times = 0;
 		boolean success = false;
@@ -84,7 +88,7 @@ public abstract class MessageHandler {
 					transactionEnd(entry);
 					break;
 				case ROWDATA:
-					rowData(entry);
+					rowData(entry, acknowledgment);
 					break;
 				default:
 					break;
@@ -98,7 +102,7 @@ public abstract class MessageHandler {
 		}
 	}
 
-	private void rowData(CanalEntry.Entry entry) throws Exception {
+	private void rowData(CanalEntry.Entry entry, Acknowledgment acknowledgment) throws Exception {
 		CanalEntry.RowChange rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
 		CanalEntry.EventType eventType = rowChange.getEventType();
 		CanalEntry.Header header = entry.getHeader();
@@ -112,7 +116,10 @@ public abstract class MessageHandler {
 				return;
 			}
 			// 处理DML数据
-			processDML(header, eventType, rowChange, sql);
+			if (header.getSchemaName().equals(SCHEMA_NAME) && header.getTableName().equals(TABLE_NAME)) {
+				processDML(header, eventType, rowChange, sql, acknowledgment);
+			}
+			
 		} catch (Exception e) {
 			logger.error("process event error ,", e);
 			logger.error(rowFormat,
@@ -132,17 +139,17 @@ public abstract class MessageHandler {
 	 * @param sql
 	 */
 	protected void processDML(CanalEntry.Header header, CanalEntry.EventType eventType, CanalEntry.RowChange rowChange,
-			String sql) {
+			String sql, Acknowledgment acknowledgment) {
 		for (CanalEntry.RowData rowData : rowChange.getRowDatasList()) {
 			switch (eventType) {
 			case DELETE:
-				delete(header, rowData.getBeforeColumnsList());
+				delete(header, rowData.getBeforeColumnsList(), acknowledgment);
 				break;
 			case INSERT:
-				insert(header, rowData.getAfterColumnsList());
+				insert(header, rowData.getAfterColumnsList(), acknowledgment);
 				break;
 			case UPDATE:
-				update(header, rowData.getAfterColumnsList());
+				update(header, rowData.getAfterColumnsList(), acknowledgment);
 				break;
 			default:
 				whenOthers(header, sql);

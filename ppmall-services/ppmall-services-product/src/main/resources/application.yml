@@ -1,11 +1,28 @@
 spring:
+  data: 
+    elasticsearch: 
+      cluster-name: elasticsearch
+      cluster-nodes: localhost:9300
+      repositories: 
+         enable: true
   kafka:
     bootstrap-servers: localhost:9092
+    listener: 
+      ack-mode: MANUAL_IMMEDIATE
     consumer:
       group-id: canal2
-      enable-auto-commit: true
-      auto-commit-interval: 1000
+      enable-auto-commit: false
+#      auto-commit-interval: 1000
 #      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 #      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       key-deserializer: com.yc.canal.kafka.MessageDeserializer
       value-deserializer: com.yc.canal.kafka.MessageDeserializer
+
+#搜索相关自定义属性
+search: 
+  #文件上传路径
+  uploadFileLocation: E:/upload/
+  #高亮前置标签
+  preTag: <font>
+  #高亮后置标签
+  postTag: </font>
