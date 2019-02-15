@@ -6,7 +6,7 @@ spring:
     name: ppmall-service-product
   cloud:
     config:
-      name: eureka,test,common,druid #需要从配置中心读取的资源名称
+      name: eureka,ppmall,common,druid #需要从配置中心读取的资源名称
       profile: dev   #访问的配置项
       label: master
       uri: http://47.93.184.228:8888 #配置中心服务

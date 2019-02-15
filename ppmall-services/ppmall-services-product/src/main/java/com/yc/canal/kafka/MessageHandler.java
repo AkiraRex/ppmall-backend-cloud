@@ -16,7 +16,6 @@ public abstract class MessageHandler {
 
 	protected static final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 	protected static final String SEP = SystemUtils.LINE_SEPARATOR;
-	protected static String contextFormat;
 	protected static String rowFormat;
 	protected static String transactionFormat;
 	protected static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
@@ -30,18 +29,7 @@ public abstract class MessageHandler {
 
 	static {
 		StringBuilder sb = new StringBuilder();
-		sb.append(SEP)
-		  	.append("-------------Batch-------------")
-		  	.append(SEP)
-		  	.append("* Batch Id: [{}] ,count : [{}] , Mem size : [{}] , Time : {}")
-		  	.append(SEP)
-			.append("* Start : [{}] ")
-			.append(SEP)
-			.append("* End : [{}] ")
-			.append(SEP)
-			.append("-------------------------------")
-			.append(SEP);
-		contextFormat = sb.toString();
+	
 
 		sb = new StringBuilder();
 		sb.append(SEP)
